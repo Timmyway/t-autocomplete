@@ -1,0 +1,23 @@
+.modal {
+	box-sizing: border-box;
+	box-shadow: $shadowPrimary;	
+	background: white;
+	position: absolute;	
+	top: 10%;
+	left: 50%;
+	width: 100%;
+	max-width: 940px;
+	transform: translate(-50%, 0);
+	z-index: 2;
+	max-height: 40rem;
+	overflow: auto;
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+	}
+
+	.modal-header, .modal-footer, .modal-body {
+		padding: 1rem 1.5rem;
+	}
+}

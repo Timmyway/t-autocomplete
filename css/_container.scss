@@ -1,0 +1,21 @@
+%abstract-container {	
+	margin: 0 auto;
+	padding: $containerPadding;
+}
+
+.container {
+	max-width: 80%;
+	@extend %abstract-container;
+}
+
+.container-fluid {
+	width: 100%;
+	@extend %abstract-container;
+}
+
+@each $bpLabel,$bpValue in $deviceBreakpoints{
+	.container-#{$bpLabel} {
+		max-width: $bpValue * 0.6;
+		@extend %abstract-container;
+	}
+}

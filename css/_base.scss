@@ -1,0 +1,133 @@
+%abstract-heading {	
+	text-transform: uppercase;
+	font-weight: bold;
+	margin: 1.3rem 0;	
+	line-height: 1.2;
+}
+
+[v-cloak] {display: none}
+
+* {box-sizing: border-box;}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+	background: #FFFAEB;
+}
+
+main {
+	min-width: $screenMinWidth * 1px;
+}
+
+footer {min-width: $screenMinWidth * 1px;}
+
+p {
+	margin: 1rem 0;
+	line-height: 1.5;
+}
+
+/* Links colors */
+a {
+	text-decoration: underline;
+	color: map-get($linkColor, 'normal');
+	&:visited {color: map-get($linkColor, 'visited')}
+	&:hover {color: map-get($linkColor, 'hover');}  
+	&:active {color: map-get($linkColor, 'active');}
+}
+
+// General rules for H1 to H6 heading tags
+$textIncrementSize: $textMaxSize;
+@for $i from 1 through 6 {	
+	@if $i < 3 {
+		h#{$i} {
+			@extend %abstract-heading;
+			font-family: $primaryFont;
+			font-size: #{$textIncrementSize * 0.5};
+		}
+		@include mq('md') {
+			h#{$i} {
+				font-size: #{$textIncrementSize * 0.7};
+			}			
+		}
+	} @else {
+		h#{$i} {
+			@extend %abstract-heading;
+			font-family: $secondaryFont;			
+			font-size: #{$textIncrementSize * 0.5};
+		}
+		@include mq('md') {
+			h#{$i} {
+				font-size: #{$textIncrementSize * 0.7};
+			}			
+		}
+	}
+	$textIncrementSize: $textIncrementSize * (1 - $textIncrementRatio);
+}
+
+.font-primary {
+	font-family: $primaryFont;
+}
+
+.font-secondary {
+	font-family: $primaryFont !important;
+}
+
+// Set colors
+@each $colorLabel,$colorValue in $colors {
+	.bg-#{$colorLabel} {
+		background: $colorValue;
+	}
+	.text-#{$colorLabel} {
+		color: $colorValue!important;
+	}
+	.btn-#{$colorLabel} {
+		background: $colorValue;
+		&:hover {
+			background: darken($colorValue, 15%);
+		}
+	}
+	.text-underline-#{$colorLabel} {
+		text-decoration: underline $colorValue;
+	}
+}
+
+// Images
+.logo {
+	&--x {
+		width: 150px;
+	}
+	&--y {
+		height: 150px;
+	}
+	&--square {
+		width: 120px;
+		height: 120px;
+	}
+}
+
+.overlay {
+	background: rgba(0,0,0,.7);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;	
+}
+
+.overlay-modal {
+	background: rgba(0,0,0,.8);
+	position: fixed;
+	transition: 0.5s ease;
+	top: 0;
+	left: 0;	
+	height: 100%;
+	width: 0;	
+	z-index: 1;
+}
+
+.overlay-modal--open {
+	width: 100%;
+}

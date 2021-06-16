@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="css/app.css">
+    <script src="https://kit.fontawesome.com/7f150bd29b.js"></script>
+    <style>
+        #list-container {
+            background: #eee; 
+        }
+        #list-container li {
+            padding: 1rem;
+            border-top: 0.5px solid #aaa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all .4s;
+        }
+        #list-container li:first-child {
+            border-top: none;
+        }
+        .is-done {
+            text-decoration: line-through;
+            background: rgba(51, 228, 26, .5);            
+        }
+
+        #indicator--save {
+            position: fixed;
+            color: #3487FC;
+            top: 1%;
+            left: 1%;
+            transition: all .4s;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-lg">
+        <span id="indicator--save">...saving</span>
+        <div class="d-flex">
+            <input type="text" class="input" placeholder="Ajouter un item">
+            <div class="d-flex">
+                <button class="ml-2 btn btn-xs btn-primary" id="btnAdd">Ajouter</button>
+                <!-- <button class="ml-2 btn btn-xs btn-info text-theme-contrast" id="btnLoad">Charger</button>                 -->
+                <!-- <button class="ml-2 btn btn-xs btn-success" id="btnSave">Enregister</button> -->
+                <button class="ml-2 btn btn-xs btn-danger" id="btnClear">Nettoyer</button>
+            </div>
+        </div>
+        <ul id="list-container" class="mt-2">
+            
+        </ul>
+    </div>
+
+    <script src="js/test.js"></script>
+</body>
+</html>

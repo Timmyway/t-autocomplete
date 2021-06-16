@@ -1,0 +1,195 @@
+// Section
+.wrapper-grid {
+	box-sizing: inherit;		
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(5, auto);
+	grid-template-areas: "header-form"
+						 "header-heading"
+						 "textbloc"
+						 "arg-1"
+						 "arg-2"
+						 "arg-3";
+	// grid-gap: 1rem;
+	.grid-item-nav {
+		grid-area: nav;		
+		display: none;
+	}	
+
+	.grid-item-heading {
+		background: rgba(49,63,198,0.7);
+		grid-area: header-heading;		
+		box-sizing: inherit;
+		box-shadow: $shadowPrimary;
+		padding: 1rem;
+		text-align: center;		
+	}
+	.grid-item-form {
+		grid-area: header-form;		
+	}
+	.grid-item-textbloc {
+		grid-area: textbloc;		
+	}
+	.grid-item-arg-1 {
+		grid-area: arg-1;		
+	}
+	.grid-item-arg-2 {
+		grid-area: arg-2;		
+	}
+	.grid-item-arg-3 {
+		grid-area: arg-3;
+	}
+
+	@include mq('xl') {
+		/* Tablet and up */		
+		grid-template-columns: 35% auto;
+		grid-template-rows: 60px repeat(4, auto);
+		grid-template-areas: "nav nav"
+							 "header-heading header-form"
+							 "textbloc textbloc"
+							 "arg-1 arg-1"
+							 "arg-2 arg-2"
+							 "arg-3 arg-3";		
+		.grid-item-nav {
+			display: flex;
+		}
+		.grid-item-heading {
+			text-align: left;
+			padding: 1.5rem;
+		}
+	}
+}		
+
+.lp-header {	
+	box-sizing: border-box;	
+	padding: 0;
+	background-image: url('../images/header.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;	
+	// border-top: 0.5rem solid $secondaryColor;
+	border-bottom: 0.5rem solid $secondaryColor;
+	clip-path: polygon(0 0, 100% 0%, 100% 90%, 0 100%);	
+	p {		
+		font-size: 1.2rem;
+		color: darken($themeColor, 5%);		
+	}		
+
+	@include mq('lg') {					
+		p {			
+			font-size: 1.3rem;
+			max-width: $contentMaxSize / 1.5
+		}
+	}
+	@include mq('xl') {		
+		p {
+			font-size: 1.5rem; 
+			max-width: $contentMaxSize
+		}
+	}
+}
+
+// Section B
+.section-b {		
+	.inner {
+		color: $themeColor;
+		// height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		text-align: center;
+		margin: auto;
+		max-width: $contentMaxSize;
+		padding: 5rem 0;
+		h3 {
+			font-size: 1.2rem;
+		}
+		h2 {
+			font-size: 2rem;
+		}
+		p {
+			font-size: 1rem;			
+		}
+	}
+	@include mq('xl') {		
+		.inner {
+			h3 {
+				font-size: 2.5rem; 				
+			}
+			h2 {
+				font-size: 4rem; 
+			}
+			p {
+				font-size: 1.5rem;
+				line-height: 2;
+			}
+		}		
+	}
+}
+
+/* LP section: text-image-cta */
+.text-image-cta {
+	display: grid;
+	grid-template-areas: "tic-image"
+						 "tic-text"
+						 "tic-btn";
+	gap: 1.5rem;	
+	text-align: center;
+	.text-image-cta__area-image {
+		grid-area: tic-image;
+	}
+	.text-image-cta__area-btn {
+		grid-area: tic-btn;
+	}
+	.text-image-cta__area-text {
+		grid-area: tic-text;		
+	}
+	@include mq('lg') {
+		text-align: left;
+		grid-template-areas: "tic-image tic-text"
+		"tic-btn tic-text" ;
+	}
+}
+
+/* End LP section */
+
+.bg-filter {
+	background:rgba(0,0,0,0.4);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;		
+}
+
+.birthdate-module {
+	@extend .container;
+}
+
+.ticket {
+	box-shadow: $shadowSecondary;
+	max-width: pixToRem(280);
+	border-radius: 4px;
+	font-size: 2rem;
+	padding: 1rem 0.5rem;
+	margin: 0 auto;	
+	display: block;
+}
+
+.pannel {
+	box-sizing: border-box;	
+	box-shadow: $shadowPrimary;
+	padding: 10px 15px;
+	&--x {
+		margin: 15px 0;
+	}
+}
+
+/* Footer */
+footer {
+	.bloctel {
+		color: white;
+		font-size: 0.9rem;
+		text-align: center;
+	}
+}

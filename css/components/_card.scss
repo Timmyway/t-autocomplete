@@ -1,0 +1,17 @@
+.card {
+    &-sm {
+        max-width: 320px;
+    }
+    &-head {
+        img {width: 100%;}
+    }
+    &-body {
+        .text-bloc {
+            max-height: 150px;
+            overflow: auto;
+        }
+    }
+    &-footer {
+
+    }
+}

@@ -1,0 +1,67 @@
+.btn {
+	box-sizing: border-box;
+	display: inline-block;	
+	color: white;
+	padding: 0.8rem 1.5rem;
+	border: none;
+	cursor: pointer;
+	font-size: 1.1rem;
+	border-radius: 4px;
+	text-decoration: none;
+	font-weight: bold;	
+	box-shadow: 0 1px 1px rgba(0,0,0,0.15), 
+		0 2px 2px rgba(0,0,0,0.15), 
+		0 4px 4px rgba(0,0,0,0.15), 
+		0 8px 8px rgba(0,0,0,0.15);
+	&-icon {		
+		background: transparent;
+		box-shadow: none;
+	}
+	&:hover {
+		opacity: .9;		
+	}
+	&--rounded {
+		border-radius: 999px;
+	}
+}
+
+$btnFontSizeBase: 0.9;
+$btnPaddingBase: 0.4;
+$sizeRatios: (
+	'xs': 1, 
+	'sm': 1.59, // +159% 
+	'md': 2.1, // +213%
+	'lg': 2.75, // +275%
+	'xl': 3.32, // +332%
+	'xxl': 3.87, // +387%	
+);
+@each $labelSize, $sizeRatio in $sizeRatios {
+	.btn-#{$labelSize} {
+		font-size: $btnFontSizeBase * $sizeRatio  * 1rem;
+		padding: ($btnPaddingBase * $sizeRatio * 1rem) ($btnPaddingBase * 2 * $sizeRatio * 1rem);
+		@each $labelSizeInner, $sizeRatioInner in $sizeRatios {
+			@include mq(#{$labelSizeInner}) {
+				.btn-#{$labelSizeInner} {
+					font-size: $btnFontSizeBase * $sizeRatioInner  * 1rem;
+				}		
+			}
+		}		
+	}	
+}
+
+.btn-link {
+	background: transparent;
+	box-shadow: none;
+	text-decoration: underline;
+}
+
+.cta {
+	padding: 3rem 2rem;
+	font-size: 4rem;
+	margin: 1rem 1rem;
+	&hover {
+		letter-spacing: 4px;
+	}
+}
+
+.btn-full {width: 100%;}

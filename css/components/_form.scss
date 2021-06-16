@@ -1,0 +1,430 @@
+%abstract-form-control {
+	box-sizing: border-box;
+	width: 100%;
+	// border-radius: 40px;
+	// height: 48px;
+	// margin-bottom: 5px;
+	font-size: 1.5rem !important;
+	padding: 5px 8px;
+	box-shadow: $shadowPrimary; 
+	border-radius: 12px;
+	// transform: skew(-12deg); 	
+	@include mq('sm') {
+		font-size: 2rem;
+		padding: 8px 11px;
+	}
+}
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select {
+	@extend %abstract-form-control;
+}
+
+.form-control {
+	@extend %abstract-form-control;
+	border-radius: none;
+	transform: none; 
+}
+
+.form-group {	
+	display: flex;
+	flex-direction: column;	
+	position: relative;		
+}
+
+.m-form-control {
+	@extend %abstract-form-control;	
+	box-shadow: none!important;		
+	position: relative;
+	z-index: 1;
+	background-color: transparent;	
+	& + label {
+		position: absolute;
+		top: 50%; left: 4%;
+		transform: translate(0, -50%);
+		font-size: 1rem;
+		color: lighten(black, 20%);
+		transition: .2s ease-out;
+	}
+	&:focus {
+		outline: none;		
+		transition: all .2s ease-out;
+	}
+
+	&:focus + label, &.has-value + label {
+		top: 0.5rem;
+		left: 1%;
+		font-weight: bold;
+		font-size: 1rem;
+	}
+
+	&:focus, &.has-value {
+		margin-top: 1rem;
+	}
+}
+
+.form-control-std {
+	@extend %abstract-form-control;
+	border-radius: none;
+	transform: none; 
+}
+
+.lp-form {
+	& > form {
+		// padding: 1rem 2rem;		
+		padding: 1rem 1.5rem;		
+		margin: 0 auto;
+	}	
+
+	.error-msg {
+		background: rgba(239, 45, 86, 0.9);
+		// z-index: 999999;
+		color: white;
+		width: 100%;
+		border-radius: 0 0 50px 50px;
+		padding: 0 15px;
+		box-sizing: border-box;
+		height: 2rem;
+		display: flex;
+		align-items: center;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		&:hover {
+			overflow: initial;
+			white-space: normal;
+			overflow-y: auto;
+		}
+	}
+
+	// Validation widget style
+	.is-valid, .is-not-valid {
+	      position: relative;
+	      align-items: center;
+	      transition: all 0.4s;
+	      box-sizing: border-box;
+	}
+
+	.is-valid {
+	     margin-bottom: 15px;
+	}
+
+	.is-not-valid.--no-mb {
+	    margin-bottom: 0px !important;
+	}
+
+	// .is-valid:before, .is-not-valid:before {
+	//       font-size: 1rem;
+	//       height: auto;
+	//       max-height: 48px;
+	//       position: absolute;
+	//       z-index: 2;
+	//       top: 0;
+	//       bottom: 0;
+	//       right: 1%;
+	//       box-sizing: border-box;
+	//       text-align: center;
+	//       display: flex;
+	//       align-items: center;
+	//       justify-content: center;
+	//       padding-right: 15px;
+	// }
+
+	.is-valid input, .is-valid select {
+	    background: rgb(128,255, 186) !important;
+	}
+
+	.is-not-valid input, .is-not-valid select {
+	    background: rgb(255, 163, 158) !important;
+	}
+
+	.is-clean {
+	    margin-bottom: 15px !important;
+	}
+
+	.is-clean input, .is-clean select {
+	    background: white !important;
+	}
+
+	.is-clean:before {
+	    border: none !important;
+	    content: "" !important;
+	    display: none;
+	}
+
+}
+
+
+/* 1. Display label */
+.big-radio + label {
+  display: block;
+  text-align: center;
+  width: 177px;
+  margin: 0;    
+  background: #fff;
+  border: 2px solid #ccc;
+  box-shadow: -7px 0 0px;  
+  border-radius: 40px;
+  color: #667;
+
+  /* Responsive */
+  font-size: 1.2rem;
+  padding: 5px 5px;
+  cursor: pointer;
+  margin: 5px 0;  
+
+  @media (map-get($breakpointsMin, 'md')) {
+    padding: 5px 15px;
+    margin: 0px 25px;
+    font-size: 1.4rem;      
+  }
+}
+.big-radio + label:hover {
+background: #aaa;
+}		
+/*@media (map-get($breakpointsMin, 'md')) {
+    padding: 10px 30px;
+}
+@media (map-get($breakpointsMin, 'lg')) {
+    padding: 5px 20px;
+}*/		
+/* 2. Hide input */
+.big-radio {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  transition: all 0.3s;
+}
+
+/* 3. Style label before */
+.big-radio + label:before {
+  content: '';
+  font-size: 1.4rem;
+  /*border: 0.2rem solid #6B7280;
+  border-radius: 0.4rem;*/
+  /*display: inline-block;*/
+  text-align: center;
+  /*vertical-align: middle;*/
+  color: transparent;
+  margin: 5px 0;
+  transition: all 0.4s;
+  /*@media (map-get($breakpointsMin, 'sm')) {
+    margin: 5px 0;
+    font-size: 3rem;    	
+  }*/
+}		
+
+/* 4. Style applied only when radio/checkbox is being checked */
+.big-radio:checked + label:before, 
+.big-radio:checked + label {
+/*background: $secondaryColor;
+border-color: $jokerColor;*/
+  content: '✓';
+  font-weight: bold;
+  color: $primaryColor;
+  background: lighten($primaryColor, 50%);
+  border: none;
+}
+
+input[type=checkbox] + label {
+    display: block;
+    margin: 0;
+}
+
+input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+input[type=checkbox] + label:before {
+    content: "✔";
+    transition: 0.4s ease;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bold;
+    border: 0.2rem solid $primaryColor;
+    border-radius: 0.4rem;
+    display: inline-block;
+    text-align: center;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    color: transparent;
+    margin-right: 15px;
+}
+
+input[type=checkbox]:checked + label:before {
+    border-color: $successColor;
+    background: $successColor;
+    color: white;
+}
+
+.chk-btn {
+    display: flex;
+    justify-content: center;
+    input {
+		display: none;
+	}
+    label {
+    	width: 100%;
+    	min-width: 160px;
+	    font-size: 1.2rem;
+	    margin-top: 2px;
+	    margin-bottom: 4px;
+	    border: 2px solid white;
+	    padding: 15px;
+	    cursor: pointer;
+	    background: #aaa;
+	    color: white!important;
+	    border-radius: 4px;
+	    font-weight: bold;
+	    &:hover {
+        background: lighten($jokerColor, 25%);
+        transform: scale(1.02);
+        transition: transform 0.2s ease-in-out;
+	    }	    
+    }
+}
+
+.icon-radio {
+	box-sizing: border-box;
+	max-width: 96px;	
+	background-color: transparent;
+	input {
+		display: none;
+	}
+	input:checked + label {
+		background: lighten($primaryColor, 20%);		
+	}
+	label {				
+		display: flex;		
+		flex-direction: column;
+		justify-content: center;		
+		align-items: center;
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 4px;
+		width: 100%;		
+		box-sizing: inherit;		
+		img {			
+			width: 100%;
+		}
+	}
+	&:hover {
+		background: lighten($primaryColor, 30%);			 
+	}
+}
+
+.icon-button {
+	box-sizing: border-box;
+	display: flex;
+    justify-content: center;	
+	max-width: 40%;
+	// margin: 1rem;
+	margin: 0.5rem;
+	padding: 1rem 0.8rem;
+	width: 100%;
+	flex-wrap: wrap;	
+	box-shadow: $shadowSecondary;
+	background: rgba(238, 238, 238);
+	border-radius: 8px;
+	transition: background 0.4s;	
+    input {
+		display: none;
+	}
+	input:checked {
+		background: $secondaryColor !important;
+	}
+	label {		
+		display: flex;		
+		flex-direction: column;
+		justify-content: center;		
+		align-items: center;
+		cursor: pointer;
+		width: 100%;		
+		box-sizing: inherit;		
+		img {
+			padding: 1.5rem;			
+			width: 64px;
+		}
+		p {	
+			max-width: 260px;
+			word-break: break-all;
+			font-size: 1rem;
+			font-weight: bold;			
+			transition: color 0.2s;
+			color: rgba(33,33,33,.7);
+		}
+	}
+	// &::after {
+	// 	content: '';
+	// 	width: 100%;
+	// 	height: 8px;
+	// 	border-radius: 0 0 12px 12px;
+	// 	background: rgba(33,33,33,.7);			
+	// }
+	&:hover {
+		background: lighten($primaryColor, 30%);
+		label p {			
+			color: white;
+		}		 
+	}	
+	@include mq('md') {		
+		max-width: 33%;
+		label {			
+			p {font-size: 1.4rem;}
+		}
+	}
+	@include mq('xl') {
+		max-width: 25%;
+		label {			
+			p {font-size: 1.5rem;}
+		}
+	}
+	@include mq('xxl') {						
+		max-width: 20%;
+		label {			
+			p {font-size: 1.7rem;}
+		}		
+	}
+}
+
+.fairway-progress {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 100%;
+	max-width: 20rem;
+	margin: auto;	
+	img {
+		width: 100%;
+	}
+	.indicator {
+		border-radius: 50%;
+		display: flex;
+		width: 3rem;
+		transition: all .4s;	
+		&--active {
+			background: $primaryColor;
+		}
+		&--inactive {
+			background: $disabledColor;
+		}
+	}
+	.glue {
+		width: 2rem;
+		height: 0.5rem;		
+		border-radius: 0 12px 0 12px;
+		transition: all .4s;	
+		&--active {
+			background: $primaryColor;
+		}
+		&--inactive {
+			background: $disabledColor;
+		}
+	}
+}
