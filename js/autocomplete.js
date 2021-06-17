@@ -1,5 +1,16 @@
-Vue.component('Autocomplete',{
-    props: ['items', 'maxitems', 'selected', 'placeholder', 'item-key', 'maxlength', 'form', 'inputtype', 'id'],
+Vue.component('Autocomplete',{    
+    props: {
+        items: Array,
+        maxitems: Number,
+        selected: String,
+        placeholder: String,
+        itemKey: String,
+        maxlength: [Number, String],
+        form: Object,
+        inputtype: String,
+        inputclass: String,
+        id: String
+    },
     data() {
         return {            
             activeItemIndex: -1,
@@ -21,13 +32,20 @@ Vue.component('Autocomplete',{
                 }       
             }
         },
-        nextItem() {            
+        nextItem() { 
+            if (this.filteredItems.length < 1 || this.activeItemIndex+1 >= this.filteredItems.length) {
+                return
+            }           
             this.activeItemIndex ++;
-            this.scrollToActiveItem('down');
+            
+            this.scrolling('autocomplete-list', 'down');
         },
-        prevItem() {            
+        prevItem() {
+            if (this.filteredItems.length < 1 || this.activeItemIndex === 0) {
+                return
+            }     
             this.activeItemIndex --;
-            this.scrollToActiveItem('up');
+            this.scrolling('autocomplete-list', 'up');
         },
         onInput() {
             this.activeItemIndex = 0;
@@ -36,26 +54,37 @@ Vue.component('Autocomplete',{
         },
         scrolling(scrollerRef, direction) {
             var scroller = this.$refs[scrollerRef];            
-            var scrollable = scroller.scrollHeight - scroller.clientHeight;
-            let scrollTop = scroller.scrollTop;
+            var scrollable = scroller.scrollHeight - scroller.clientHeight;            
             // var scrollPercent = Math.ceil(scrollTop) / scrollable * 100;            
             // DEV mode only...
-            console.log('Container Height: ', scroller.clientHeight)
-            console.log('Max scroll (px)', scrollable)            
-            console.log('Number of items: ', this.filteredItems.length)
-            console.log('Y axis scroll (px): ', scroller.scrollTop)
             var oneStep = 50;
-            console.log('Active item index: ', this.activeItemIndex);
-            const activePos = this.activeItemIndex * 50;            
-            console.log('=============>', activePos);
-            const activeElement = this.$refs.activeitem[0].getBoundingClientRect();
-            console.log('Active item position: ', activeElement.top)
-            // scroller.scrollTop = activePos;                        
-                // console.log('One step: ', oneStep)
-            if (activeElement.top > 0 && direction === 'up') {
-                scroller.scrollTop -= oneStep;
-            } else if (activeElement.top > 500 && direction === 'down' && activeElement.top < scrollable) {
-                scroller.scrollTop += oneStep;
+            const activeElement = this.$refs.activeitem[0];
+            function notify(context) {
+                console.log('----------------------------------------------');
+                console.log('Container Height: ', scroller.clientHeight)
+                console.log('Max scroll (px)', scrollable)            
+                console.log('Number of items: ', context.items.length)
+                console.log('Y axis scroll (px): ', scroller.scrollTop)          
+                console.log('Active item index: ', context.activeItemIndex);                              
+                console.log('Active item position: ', activeElement.top)          
+                console.log('----------------------------------------------');
+            }
+            // Don't scroll if still visible on viewport.
+            if (direction === 'up')
+            {
+                console.log('Scroll into view UP');
+                activeElement.scrollIntoViewIfNeeded({block: 'center'});
+                if (activeElement.getBoundingClientRect().top < 103) {
+                    scroller.scrollTop -= oneStep;
+                }                
+            } 
+            else if (direction === 'down') 
+            {
+                console.log('Scroll into view DOWN');
+                activeElement.scrollIntoViewIfNeeded({block: 'center'});
+                if (activeElement.getBoundingClientRect().top > 500) {
+                    scroller.scrollTop += oneStep;
+                }                
             }            
             // console.log(scrollPercent);
             // return scrollPercent;
@@ -67,21 +96,11 @@ Vue.component('Autocomplete',{
             switch (e.keyCode) {
                 case 40:
                     // ARROW-DOWN key pressed                    
-                    if (this.filteredItems.length < 1 || this.activeItemIndex+1 >= this.filteredItems.length) {
-                        return
-                    }
-                    this.nextItem();
-                    // this.scrolling('autocomplete-list', 'down');
-                    console.log('Arrow down key is pressed');                            
+                    this.nextItem();                    
                     break;
                 case 38:
-                    // ARROW-UP key pressed
-                    if (this.filteredItems.length < 1 || this.activeItemIndex === 0) {                        
-                        return
-                    }                           
-                    this.prevItem();
-                    // this.scrolling('autocomplete-list', 'up');
-                    console.log('Arrow up key is pressed');
+                    // ARROW-UP key pressed                    
+                    this.prevItem();                    
                     break;
                 case 13:
                     // User press ENTER key
@@ -123,10 +142,11 @@ Vue.component('Autocomplete',{
             // Begin to search only after the users has typed 2 words
             console.log('User input ====>', this.form.userInput)
             if (this.form.userInput.length < 2) {
+                this.view.suggestList = false;
                 return []
             }            
             // console.log('List of items to Fiiiiiiilter', this.items);            
-            this.view.suggestList = true;            
+            this.view.suggestList = true;
             let filtered = this.items.filter((item) => {
                 if (typeof item === 'string') {
                     if (item.toLowerCase().indexOf(this.form.userInput.toLowerCase()) > -1) {
@@ -163,13 +183,13 @@ Vue.component('Autocomplete',{
     :id="id"
     ref="autocomplete"
     :type="inputtype ? inputtype : 'text'" 
-    class="form-control" 
+    :class="[inputclass ? inputclass : 'form-control']"
     :placeholder="placeholder"
     v-model="form.userInput"
     @input="onInput"
     @blur="handleBlurAutocomplete()"
     :maxlength="maxlength"    
-    autocomplete="chrome-off"
+    autocomplete="off"
 >
 <ul 
     class="autocomplete-list list-group" 

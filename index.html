@@ -17,14 +17,15 @@
         <Autocomplete
             id="form-zipcode"
             :items="zipcodeList"
-            :maxitems="250"
-            @input="fetchZipcode"
+            :maxitems="100"
             :selected.sync="form.zipcode"
             item-key="cityzipcode"
+            inputtype="tel"
+            inputclass="form-control"
             placeholder="Code postal"
             maxlength="5"
             :form="form"
-            inputtype="tel"
+            @input="fetchZipcode"
         ></Autocomplete>
     </div>
 </body>
@@ -46,8 +47,28 @@
         },
         methods: {
             fetchZipcode() {
-                this.zipcodeList = [{'cityzipcode': '24000, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24000'}, {'cityzipcode': '24001, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24001'}, {'cityzipcode': '24002, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24002'}, {'cityzipcode': '24003, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24003'}, {'cityzipcode': '24004, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24004'}, {'cityzipcode': '24005, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24005'}, {'cityzipcode': '24006, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24006'}, {'cityzipcode': '24007, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24007'}, {'cityzipcode': '24008, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24008'}, {'cityzipcode': '24009, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24009'}, {'cityzipcode': '24010, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24010'}, {'cityzipcode': '24011, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24011'}, {'cityzipcode': '24012, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24012'}, {'cityzipcode': '24013, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24013'}, {'cityzipcode': '24014, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24014'}, {'cityzipcode': '24015, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24015'}, {'cityzipcode': '24016, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24016'}, {'cityzipcode': '24017, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24017'}, {'cityzipcode': '24018, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24018'}, {'cityzipcode': '24019, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24019'}, {'cityzipcode': '24020, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24020'}, {'cityzipcode': '24021, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24021'}, {'cityzipcode': '24022, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24022'}, {'cityzipcode': '24023, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24023'}, {'cityzipcode': '24024, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24024'}, {'cityzipcode': '24025, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24025'}, {'cityzipcode': '24026, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24026'}, {'cityzipcode': '24027, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24027'}, {'cityzipcode': '24028, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24028'}, {'cityzipcode': '24029, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24029'}, {'cityzipcode': '24030, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24030'}, {'cityzipcode': '24031, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24031'}, {'cityzipcode': '24032, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24032'}, {'cityzipcode': '24033, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24033'}, {'cityzipcode': '24034, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24034'}, {'cityzipcode': '24035, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24035'}, {'cityzipcode': '24036, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24036'}, {'cityzipcode': '24037, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24037'}, {'cityzipcode': '24038, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24038'}, {'cityzipcode': '24039, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24039'}, {'cityzipcode': '24040, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24040'}, {'cityzipcode': '24041, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24041'}, {'cityzipcode': '24042, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24042'}, {'cityzipcode': '24043, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24043'}, {'cityzipcode': '24044, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24044'}, {'cityzipcode': '24045, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24045'}, {'cityzipcode': '24046, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24046'}, {'cityzipcode': '24047, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24047'}, {'cityzipcode': '24048, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24048'}, {'cityzipcode': '24049, ABJAT SUR BANDIAT', 'city': 'ABJAT SUR BANDIAT', 'zipcode': '24049'}, {'cityzipcode': '24050, ABJAT SUR BANDIAT'}];
+            console.log('Zipcode value: ', this.form.zipcode);
+            console.log('CITY value: ', this.form.city);
+            // if (this.form.zipcode.length < 2) {
+            //  console.log('Search can start only after 2 characters input');
+            //  return;
+            // }
+            console.log('Fetch zipcode list');
+            const payload = {                       
+                zipcode: this.form.userInput
             }
+            axios.post('https://devfastoche.xyz/zipcodeapi/api/cityzipcode', payload)
+            .then((response) => {
+                console.log(response.data);
+                this.zipcodeList = response.data.map((item) => {
+                    return {'cityzipcode': `${item.zipcode}, ${item.city}`, city: item.city, zipcode: item.zipcode}
+                });
+                console.log(this.zipcodeList)
+            })
+            .catch((error) => {
+                console.log(error);
+            }); 
+        },
         }
     });
 </script>

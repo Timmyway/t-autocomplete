@@ -15,7 +15,7 @@
 		// padding: 10px 15px;
 		box-sizing: border-box;
 		height: 50px;
-		overflow: hidden; 
+		overflow: hidden;
 		display: flex; 
 		align-items: center; 
 		justify-content: flex-start; 
@@ -32,6 +32,9 @@
 	.item--active {
 		background: $primaryColor;
 		color: white;
+		// position: sticky;
+    	// top: 0;
+    	// bottom: 0;
 		// z-index: 9999999999999999999999999!important;
 		// position: sticky; top: 0
 	}
