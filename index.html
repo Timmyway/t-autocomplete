@@ -14,63 +14,92 @@
 
 <body>
     <div id="app">
-        <Autocomplete
+        <!-- <Autocomplete
             id="form-zipcode"
             :items="zipcodeList"
-            :maxitems="100"
-            :selected.sync="form.zipcode"
+            :maxitems="100"            
             item-key="cityzipcode"
             inputtype="tel"
             inputclass="form-control"
             placeholder="Code postal"
             maxlength="5"
+            :selected.sync="form.zipcode"
+            :value.sync="form.userInput"
             :form="form"
             @input="fetchZipcode"
-        ></Autocomplete>
+        ></Autocomplete> -->
+
+        <Combobox
+            id="form-zipcode"
+            selectid="ville"
+            :items="zipcodeList"
+            :maxitems="100"            
+            item-key="cityzipcode"
+            search-key="zipcode"
+            result-key="city"
+            inputtype="tel"
+            inputclass="form-control"
+            placeholder="Code postal"
+            selectplaceholder="Ville"
+            maxlength="5"
+            v-model:inputvalue="form.zipcode"
+            v-model:selectvalue="form.city"
+            v-model:value="form.userInput"
+            :form="form"
+            @input="fetchZipcode"
+        ></Combobox>
+        {{ form }}
     </div>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+<script src="https://unpkg.com/vue@next"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="js/autocomplete.js"></script>
-<script>
-    var vm = new Vue({
-        'el': '#app',
+<script>       
+    const ZipcodeAutocomplete = {
         data() {
             return {
                 zipcodeList: [],
                 form: {
                     zipcode: '',
+                    city: '',
                     userInput: ''
                 }
             }
         },
         methods: {
             fetchZipcode() {
-            console.log('Zipcode value: ', this.form.zipcode);
-            console.log('CITY value: ', this.form.city);
-            // if (this.form.zipcode.length < 2) {
-            //  console.log('Search can start only after 2 characters input');
-            //  return;
-            // }
-            console.log('Fetch zipcode list');
-            const payload = {                       
-                zipcode: this.form.userInput
-            }
-            axios.post('https://devfastoche.xyz/zipcodeapi/api/cityzipcode', payload)
-            .then((response) => {
-                console.log(response.data);
-                this.zipcodeList = response.data.map((item) => {
-                    return {'cityzipcode': `${item.zipcode}, ${item.city}`, city: item.city, zipcode: item.zipcode}
-                });
-                console.log(this.zipcodeList)
-            })
-            .catch((error) => {
-                console.log(error);
-            }); 
-        },
+                console.log('Zipcode value: ', this.form.zipcode);
+                console.log('CITY value: ', this.form.city);
+                // if (this.form.zipcode.length < 2) {
+                //  console.log('Search can start only after 2 characters input');
+                //  return;
+                // }
+                console.log('Fetch zipcode list');
+                const payload = {                       
+                    zipcode: this.form.userInput
+                }
+                axios.post('https://devfastoche.xyz/zipcodeapi/api/cityzipcode', payload)
+                .then((response) => {
+                    console.log(response.data);
+                    this.zipcodeList = response.data.map((item) => {
+                        return {'cityzipcode': `${item.zipcode}, ${item.city}`, city: item.city, zipcode: item.zipcode}
+                    });
+                    console.log(this.zipcodeList)
+                })
+                .catch((error) => {
+                    console.log(error);
+                }); 
+            }            
         }
-    });
+    };
+
+    var app = Vue.createApp(ZipcodeAutocomplete);    
+</script>
+<script src="js/autocomplete.js"></script>
+<script src="js/combobox.js"></script>
+<script>
+    app.mount('#app');
 </script>
 
 </html>
